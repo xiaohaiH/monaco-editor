@@ -1,0 +1,59 @@
+{
+    "name": "@xiaohaih/vue-monaco-editor",
+    "version": "0.0.1",
+    "description": "",
+    "main": "dist/index.js",
+    "jsdelivr": "dist/index.umd.js",
+    "unpkg": "dist/index.umd.js",
+    "iife": "dist/index.iife.js",
+    "module": "index.ts",
+    "types": "index.ts",
+    "exports": {
+        ".": {
+            "require": "./dist/index.js",
+            "import": "./index.ts",
+            "browser": "./dist/index.mjs",
+            "types": "./index.ts"
+        },
+        "./*": "./*"
+    },
+    "scripts": {
+        "build": "vite build",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "xiaohaih",
+    "license": "ISC",
+    "dependencies": {
+        "@xiaohaih/monaco-editor": "workspace:^",
+        "vue-demi": "^0.14.6"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.4",
+        "@vitejs/plugin-vue-jsx": "^3.1.0",
+        "fast-glob": "^3.3.2",
+        "monaco-editor": "^0.44.0",
+        "vite-plugin-dts": "^3.6.3",
+        "vue": "^3.3.8"
+    },
+    "peerDependencies": {
+        "monaco-editor": ">0.30.0"
+    },
+    "publishConfig": {
+        "main": "dist/index.js",
+        "unpkg": "dist/index.umd.js",
+        "jsdelivr": "dist/index.umd.js",
+        "iife": "dist/index.iife.js",
+        "module": "dist/index.mjs",
+        "types": "dist/index.d.ts",
+        "exports": {
+            ".": {
+                "require": "./dist/index.js",
+                "import": "./dist/index.mjs",
+                "browser": "./dist/index.umd.js",
+                "types": "./dist/index.d.ts"
+            },
+            "./*": "./*"
+        }
+    }
+}
