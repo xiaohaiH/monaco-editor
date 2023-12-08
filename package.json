@@ -8,6 +8,8 @@
         "dev": "vite --host",
         "build": "vite build",
         "preview": "vite preview",
+        "------------ 发布所有包 ---------------": "",
+        "publishing": "pnpm --filter @xiaohaih/monaco-editor publish --access=public && pnpm --filter @xiaohaih/vue-monaco-editor publish --access=public",
         "------------ 所有子模块打包 ---------------": "",
         "build:all": "pnpm build:editor && pnpm build:vue-editor",
         "------------ 编辑器打包 ---------------": "",

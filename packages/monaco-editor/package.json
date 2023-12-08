@@ -1,6 +1,6 @@
 {
     "name": "@xiaohaih/monaco-editor",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "",
     "main": "dist/index.js",
     "jsdelivr": "dist/index.umd.js",
@@ -22,7 +22,11 @@
         "build": "vite build",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "keywords": [],
+    "keywords": [
+        "monaco-editor",
+        "code-editor",
+        "editor"
+    ],
     "author": "xiaohaih",
     "license": "ISC",
     "dependencies": {
