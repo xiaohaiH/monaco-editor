@@ -48,12 +48,18 @@ importers:
 
   packages/vue-monaco-editor:
     dependencies:
+      '@vue/composition-api':
+        specifier: ^1.0.0-rc.1
+        version: 1.0.0-rc.1(vue@3.3.8)
       '@xiaohaih/monaco-editor':
         specifier: workspace:^
         version: link:../monaco-editor
+      vue:
+        specifier: ^2.0.0 || >=3.0.0
+        version: 3.3.8(typescript@5.2.2)
       vue-demi:
         specifier: ^0.14.6
-        version: 0.14.6(vue@3.3.8)
+        version: 0.14.6(@vue/composition-api@1.0.0-rc.1)(vue@3.3.8)
     devDependencies:
       '@types/node':
         specifier: ^20.10.4
@@ -70,9 +76,6 @@ importers:
       vite-plugin-dts:
         specifier: ^3.6.3
         version: 3.6.4(@types/node@20.10.4)(typescript@5.2.2)(vite@5.0.0)
-      vue:
-        specifier: ^3.3.8
-        version: 3.3.8(typescript@5.2.2)
 
 packages:
 
@@ -1160,6 +1163,15 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.3.8
       '@vue/shared': 3.3.8
+
+  /@vue/composition-api@1.0.0-rc.1(vue@3.3.8):
+    resolution: {integrity: sha512-6I5LkfA+VvVOLZufRugzQ5sWKQH81/Cr9gRLidDSeUmjRPolEEWgG4MAnWtBR5zgP5qbRMwZJ4IEYtKhnadMQQ==}
+    peerDependencies:
+      vue: '>= 2.5 < 3'
+    dependencies:
+      tslib: 2.6.2
+      vue: 3.3.8(typescript@5.2.2)
+    dev: false
 
   /@vue/language-core@1.8.22(typescript@5.2.2):
     resolution: {integrity: sha512-bsMoJzCrXZqGsxawtUea1cLjUT9dZnDsy5TuZ+l1fxRMzUGQUG9+Ypq4w//CqpWmrx7nIAJpw2JVF/t258miRw==}
@@ -2900,6 +2912,10 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+    dev: false
+
   /tty-table@4.2.3:
     resolution: {integrity: sha512-Fs15mu0vGzCrj8fmJNP7Ynxt5J7praPXqFN0leZeZBXJwkMxv9cb2D454k1ltrtUSJbZ4yH4e0CynsHLxmUfFA==}
     engines: {node: '>=8.0.0'}
@@ -3085,7 +3101,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vue-demi@0.14.6(vue@3.3.8):
+  /vue-demi@0.14.6(@vue/composition-api@1.0.0-rc.1)(vue@3.3.8):
     resolution: {integrity: sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==}
     engines: {node: '>=12'}
     hasBin: true
@@ -3097,6 +3113,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      '@vue/composition-api': 1.0.0-rc.1(vue@3.3.8)
       vue: 3.3.8(typescript@5.2.2)
     dev: false
 

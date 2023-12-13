@@ -1,9 +1,5 @@
-<template>
-    <div ref="domRef"></div>
-</template>
-
-<script lang="ts">
-import { defineComponent, isVue3, ref, watch, onMounted, type PropType, markRaw } from 'vue-demi';
+<script lang="tsx">
+import { defineComponent, isVue3, ref, h, watch, onMounted, type PropType, markRaw } from 'vue-demi';
 import { type editor } from 'monaco-editor';
 import { createEditor, formatDocument, updateModelValue } from '@xiaohaih/monaco-editor';
 
@@ -165,7 +161,9 @@ export default defineComponent({
             editorInfo,
         };
     },
+    render() {
+        const { domRef } = this;
+        return h('div', { ref: domRef }); // <div ref={domRef}></div>;
+    },
 });
 </script>
-
-<style scoped></style>

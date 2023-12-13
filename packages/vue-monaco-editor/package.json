@@ -1,6 +1,6 @@
 {
     "name": "@xiaohaih/vue-monaco-editor",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "",
     "main": "dist/index.js",
     "jsdelivr": "dist/index.umd.js",
@@ -35,13 +35,21 @@
         "@vitejs/plugin-vue-jsx": "^3.1.0",
         "fast-glob": "^3.3.2",
         "monaco-editor": "^0.44.0",
-        "vite-plugin-dts": "^3.6.3",
-        "vue": "^3.3.8"
+        "vite-plugin-dts": "^3.6.3"
     },
     "peerDependencies": {
-        "monaco-editor": ">0.30.0"
+        "@vue/composition-api": "^1.0.0-rc.1",
+        "monaco-editor": ">0.30.0",
+        "vue": "^2.0.0 || >=3.0.0"
+    },
+    "peerDependenciesMeta": {
+        "@vue/composition-api": {
+            "optional": true
+        }
     },
     "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/",
         "main": "dist/index.js",
         "unpkg": "dist/index.umd.js",
         "jsdelivr": "dist/index.umd.js",

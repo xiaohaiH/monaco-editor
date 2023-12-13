@@ -9,7 +9,7 @@
         "build": "vite build",
         "preview": "vite preview",
         "------------ 发布所有包 ---------------": "",
-        "publishing": "pnpm --filter @xiaohaih/monaco-editor publish --access=public && pnpm --filter @xiaohaih/vue-monaco-editor publish --access=public",
+        "publishing": "pnpm --filter @xiaohaih/monaco-editor publish && pnpm --filter @xiaohaih/vue-monaco-editor publish",
         "------------ 所有子模块打包 ---------------": "",
         "build:all": "pnpm build:editor && pnpm build:vue-editor",
         "------------ 编辑器打包 ---------------": "",
@@ -32,5 +32,9 @@
         "typescript": "^5.2.2",
         "vite": "^5.0.0",
         "vue-tsc": "^1.8.22"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "http://registry.npmjs.org/"
     }
 }

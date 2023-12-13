@@ -1,6 +1,6 @@
 {
     "name": "@xiaohaih/monaco-editor",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "",
     "main": "dist/index.js",
     "jsdelivr": "dist/index.umd.js",
@@ -41,6 +41,8 @@
         "monaco-editor": ">0.30.0"
     },
     "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/",
         "main": "dist/index.js",
         "unpkg": "dist/index.umd.js",
         "jsdelivr": "dist/index.umd.js",

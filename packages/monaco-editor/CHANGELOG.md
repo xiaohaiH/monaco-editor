@@ -1,5 +1,11 @@
 # @xiaohaih/monaco-editor
 
+## 0.0.3
+
+### Patch Changes
+
+- :bug: 修复 vue-demi 未生效导致初始化报错
+
 ## 0.0.2
 
 ### Patch Changes
