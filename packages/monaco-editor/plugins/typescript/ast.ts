@@ -22,6 +22,7 @@ export function toAst(value: string, extraOption?: ParserOptions): AstTree | und
             sourceType: 'module',
             errorRecovery: true,
             allowImportExportEverywhere: true,
+            createImportExpressions: true,
             plugins: ['typescript'],
             ...extraOption,
         });

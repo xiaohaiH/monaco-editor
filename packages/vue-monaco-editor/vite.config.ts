@@ -52,8 +52,8 @@ export default defineConfig({
         rollupOptions: {
             external,
             output: [
-                { entryFileNames: getFilename(pkg.module), format: 'es' },
-                { entryFileNames: getFilename(pkg.main), format: 'cjs', exports: 'named' },
+                { entryFileNames: getFilename(pkg.module), format: 'es', globals },
+                { entryFileNames: getFilename(pkg.main), format: 'cjs', exports: 'named', globals },
                 // { entryFileNames: getFilename(pkg.unpkg), format: 'umd', name: 'MonacoEditor', globals },
                 // { entryFileNames: getFilename(pkg.iife), format: 'iife', name: 'MonacoEditor', globals },
             ],

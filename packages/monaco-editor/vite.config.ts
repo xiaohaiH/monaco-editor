@@ -5,8 +5,8 @@ import fastGlob from 'fast-glob';
 import dts from 'vite-plugin-dts';
 import pkgJson from './package.json';
 
-const external = ['monaco-editor', '@babel/parser'];
-const globals = { 'monaco-editor': 'monaco' };
+const external = ['@babel/parser'];
+const globals = { '@babel/parser': '' };
 // @ts-ignore
 const pkg = pkgJson.publishConfig || pkgJson;
 

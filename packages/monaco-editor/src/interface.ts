@@ -1,4 +1,4 @@
-import { editor, type Uri } from 'monaco-editor';
+import { type editor, type Uri } from './monaco';
 
 /** 初始化编辑器时提供的参数 */
 export interface EditorOption extends Omit<editor.IStandaloneEditorConstructionOptions, 'value' | 'model'> {
@@ -28,6 +28,9 @@ export interface EditorInfo {
     addPlugin<T = unknown>(plugin: PluginOption<T>): void;
     /** 删除插件 */
     removePlugin(pluginName: string): void;
+    /** 获取插件 */
+    getPlugins<T>(): PluginOption<T>[];
+    getPlugins<T>(pluginName: string): PluginOption<T> | undefined;
     /** 清空插件 */
     clearPlugin(): void;
 }

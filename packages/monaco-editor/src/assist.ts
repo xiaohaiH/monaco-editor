@@ -1,4 +1,4 @@
-import { type editor } from 'monaco-editor';
+import { type editor } from './monaco';
 
 /** 格式化文档 */
 export function formatDocument(editor: editor.IStandaloneCodeEditor) {

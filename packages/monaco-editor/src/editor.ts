@@ -1,4 +1,4 @@
-import { editor, Uri } from 'monaco-editor';
+import { monaco, type editor, type Uri } from './monaco';
 import { EditorInfo, EditorOption, PluginOption } from './interface';
 
 /** 保存编辑器的信息 */
@@ -21,7 +21,7 @@ export function createEditor(_option: EditorOption): EditorInfo {
     option.plugins = option.plugins ? [...option.plugins] : [];
     const id = option.id || ++_editorId;
     const { value, dom, ...extraOption } = option;
-    const editorInstance = editor.create(option.dom, {
+    const editorInstance = monaco.editor.create(option.dom, {
         theme: 'vs-dark',
         tabSize: 4,
         detectIndentation: false,
@@ -32,7 +32,7 @@ export function createEditor(_option: EditorOption): EditorInfo {
 
     const model = createFile({
         ...option,
-        uri: Uri.file(`/root${id}/Untitled-${filenameBeginNum}`),
+        uri: monaco.Uri.file(`/root${id}/Untitled-${filenameBeginNum}`),
         getPlugins: () => option.plugins,
     });
 
@@ -55,10 +55,16 @@ export function createEditor(_option: EditorOption): EditorInfo {
         },
         addPlugin(plugin) {
             option.plugins.push(plugin);
-            editor.getModels().forEach((o) => {
+            monaco.editor.getModels().forEach((o) => {
                 plugin.isMatch(o.getLanguageId()) &&
                     plugin.parse({ text: model!.getValue(), uri: model!.uri, language: o.getLanguageId() });
             });
+        },
+        // @ts-ignore
+        getPlugins(pluginName?: string) {
+            return typeof pluginName === 'string'
+                ? option.plugins.find((v) => v.name === pluginName)
+                : [...option.plugins];
         },
         removePlugin(pluginName) {
             const idx = option.plugins.findIndex((v) => v.name === pluginName);
@@ -98,10 +104,10 @@ export function createFile({
     getPlugins,
 }: Pick<EditorOption, 'value' | 'language'> & { uri: Uri | string; getPlugins: () => PluginOption<any>[] }) {
     if (typeof content === 'object') return content;
-    const uri = typeof _uri === 'string' ? Uri.parse(_uri) : _uri;
-    let model = editor.getModel(uri);
+    const uri = typeof _uri === 'string' ? monaco.Uri.parse(_uri) : _uri;
+    let model = monaco.editor.getModel(uri);
     if (!model) {
-        model = editor.createModel(content || '', language, uri);
+        model = monaco.editor.createModel(content || '', language, uri);
 
         const cb = () => {
             getPlugins()

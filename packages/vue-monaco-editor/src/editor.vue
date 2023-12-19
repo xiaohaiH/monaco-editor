@@ -1,7 +1,8 @@
 <script lang="tsx">
-import { defineComponent, isVue3, ref, h, watch, onMounted, type PropType, markRaw } from 'vue-demi';
+import { computed, defineComponent, ref, h, watch, onMounted, type PropType, markRaw } from 'vue-demi';
+import * as monaco from 'monaco-editor';
 import { type editor } from 'monaco-editor';
-import { createEditor, formatDocument, updateModelValue } from '@xiaohaih/monaco-editor';
+import { initMonaco, createEditor, formatDocument, updateModelValue } from '@xiaohaih/monaco-editor';
 
 // import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
 // import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
@@ -60,8 +61,8 @@ import { createEditor, formatDocument, updateModelValue } from '@xiaohaih/monaco
 //     },
 // };
 
-const MODEL_VALUE = isVue3 ? 'modelValue' : 'value';
-const MODEL_VALUE_EMIT = isVue3 ? 'update:modelValue' : 'input';
+const modelValue = 'modelValue';
+const modelValueEmit = 'update:modelValue';
 
 /**
  * @file 编辑器
@@ -70,18 +71,25 @@ export default defineComponent({
     name: 'VueMonacoEditor',
     components: {},
     props: {
+        /** 编辑器的值 - 优先取该字段 */
+        [modelValue]: { type: [String, Object] as PropType<string | editor.ITextModel> },
         /** 编辑器的值 */
-        [MODEL_VALUE]: { type: [String, Object] as PropType<string | editor.ITextModel> },
+        value: { type: [String, Object] as PropType<string | editor.ITextModel> },
         language: { type: String as PropType<string>, required: true },
         editorOption: {
             type: Object as PropType<Omit<editor.IStandaloneEditorConstructionOptions, 'value' | 'model'>>,
         },
     },
     emits: {
-        [MODEL_VALUE_EMIT]: (val: string) => true,
+        [modelValueEmit]: (val: string) => true,
+        input: (val: string) => true,
     },
     setup(props, context) {
-        const { editorOption, [MODEL_VALUE]: initialValue, ...baseProps } = props;
+        initMonaco(monaco);
+        const MODEL_VALUE = computed(() => (props[modelValue] !== undefined ? modelValue : 'value'));
+        const MODEL_VALUE_EMIT = MODEL_VALUE.value === modelValue ? modelValueEmit : 'input';
+
+        const { editorOption, [MODEL_VALUE.value]: initialValue, ...baseProps } = props;
         const domRef = ref<HTMLDivElement>();
         const dom = ref(markRaw(document.createElement('div')));
         Object.assign(dom.value.style, { width: '100%', height: '100%' });
@@ -147,14 +155,13 @@ export default defineComponent({
             }
         }
 
-        watch(
-            () => props[MODEL_VALUE],
-            (val) => {
-                if (typeof val === 'object') return editorInfo.value.editor.setModel(val);
-                const model = editorInfo.value.editor.getModel();
-                model && updateModelValue(model, val || '');
-            },
-        );
+        props[MODEL_VALUE.value] && valueChange(props[MODEL_VALUE.value]);
+        function valueChange(val: string) {
+            if (typeof val === 'object') return editorInfo.value.editor.setModel(val);
+            const model = editorInfo.value.editor.getModel();
+            model && updateModelValue(model, val || '');
+        }
+        watch(() => props[MODEL_VALUE.value], valueChange);
 
         return {
             domRef,
@@ -162,8 +169,7 @@ export default defineComponent({
         };
     },
     render() {
-        const { domRef } = this;
-        return h('div', { ref: domRef }); // <div ref={domRef}></div>;
+        return h('div', { ref: 'domRef' });
     },
 });
 </script>

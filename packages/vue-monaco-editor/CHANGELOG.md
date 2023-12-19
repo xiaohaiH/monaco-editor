@@ -1,5 +1,13 @@
 # @xiaohaih/vue-monaco-editor
 
+## 0.0.4
+
+### Patch Changes
+
+- monaco 由外部传入且 vue-monaco-editor 在渲染时再进行初始化
+- Updated dependencies
+  - @xiaohaih/monaco-editor@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
