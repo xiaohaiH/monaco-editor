@@ -1,5 +1,11 @@
 # @xiaohaih/monaco-editor
 
+## 0.0.5
+
+### Patch Changes
+
+- 优化开发体验(导入从 dist 文件夹开始查找)
+
 ## 0.0.4
 
 ### Patch Changes
