@@ -64,12 +64,20 @@ export async function loadDts({ text, uri, isLib, loadMod, language, declaration
                     const tempPath = isModulePath(mod.value)
                         ? `${NODE_MODULES_FOLDER}${mod.value}`
                         : resolvePath(uri, mod.value);
-                    const newUri = mod.value === getModuleName(mod.value) ? `${tempPath}/index` : tempPath;
+                    let newUri = mod.value === getModuleName(mod.value) ? `${tempPath}/index` : tempPath;
 
                     fileInfo.filepaths.push(newUri);
                     if (modMap[newUri] === 'loading' || modMap[newUri] === 'success') return;
                     modMap[newUri] = 'loading';
-                    return new Promise<string>((r) => r(loadMod(mod.value, tempPath.slice(NODE_MODULES_FOLDER.length))))
+                    return new Promise<string>((r) =>
+                        r(
+                            loadMod(mod.value, tempPath.slice(NODE_MODULES_FOLDER.length), (isDir) =>
+                                typeof isDir === 'string'
+                                    ? (newUri = isDir)
+                                    : isDir && newUri.charAt(newUri.length - 1) !== '/' && (newUri += '/index'),
+                            ),
+                        ),
+                    )
                         .then((v) => {
                             modMap[newUri] = 'success';
                             loadDts({
@@ -136,8 +144,17 @@ export async function getSyntaxWorkerFunc(workType: 'getJavaScriptWorker' | 'get
 
 /** 插件的配置项 */
 export interface Option {
-    /** 加载依赖项 */
-    loadMod?: (name: string, filepath: string) => Promise<string> | string;
+    /**
+     * 加载依赖项
+     * @property {string} name 模块名称
+     * @property {string} filepath 模块绝对路径
+     * @property {Function} cb 通知内部该路径是否是目录(比如写的是(C:/project), 实际应该是(C:/project/index.ts))
+     */
+    loadMod?: (
+        name: string,
+        filepath: string,
+        cb: (isDirOrFilepath?: boolean | string) => void,
+    ) => Promise<string> | string;
     /** 是否给声明文件创建 model(会影响效率, 但声明文件内部不会报错) */
     declarationModel?: boolean;
     /** 传递给 ast parse 的参数 */

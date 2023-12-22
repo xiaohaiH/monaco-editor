@@ -1,5 +1,13 @@
 # @xiaohaih/vue-monaco-editor
 
+## 0.0.6
+
+### Patch Changes
+
+- 加载模块时允许外部对路径进行调整
+- Updated dependencies
+  - @xiaohaih/monaco-editor@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes

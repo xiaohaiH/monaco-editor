@@ -1,6 +1,6 @@
 {
     "name": "@xiaohaih/vue-monaco-editor",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "",
     "main": "dist/index.js",
     "jsdelivr": "dist/index.umd.js",
