@@ -1,8 +1,6 @@
-/package
-/src
-/*.ts
-rollup.config.js
-rollup.config.ts
+# /package
+# /src
+# /*.ts
 tsconfig.json
 tsconfig.node.json
 vite-env.d.ts

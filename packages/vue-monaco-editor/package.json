@@ -15,7 +15,7 @@
             "browser": "./dist/index.mjs",
             "types": "./index.ts"
         },
-        "./*": "./*"
+        "./src": "./dist/src"
     },
     "scripts": {
         "build": "vite build",

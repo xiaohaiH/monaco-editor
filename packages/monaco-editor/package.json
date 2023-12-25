@@ -15,7 +15,8 @@
             "browser": "./dist/index.mjs",
             "types": "./index.ts"
         },
-        "./*": "./*"
+        "./src": "./dist/src",
+        "./plugins": "./dist/plugins"
     },
     "scripts": {
         "build3": "tsc -p tsconfig-build.json",
